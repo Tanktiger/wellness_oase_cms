@@ -1,0 +1,21 @@
+{% block body -%}
+    {% form_theme form 'WOOrganizerBundle:Form:fields.html.twig' %}
+    <div class="modal-dialog">
+        <div class="modal-content">
+            {#<div class="modal-header">#}
+                {#<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>#}
+                {#<h4 class="modal-title">Worktime creation</h4>#}
+
+            {#</div>#}
+            {{  form_start(form, {'attr': {'class': 'form'}}) }}
+            <div class="modal-body">
+                <div class="te">
+                    {{ form_widget(form) }}
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </div>
+        <!-- /.modal-content -->
+    </div>
+{% endblock %}

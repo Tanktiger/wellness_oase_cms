@@ -1,0 +1,28 @@
+{% extends 'WOMainBundle::admin.html.twig' %}
+
+{% block body -%}
+    <h1>Seite editieren</h1>
+
+    {% form_theme edit_form 'WOMainBundle:Form:fields.html.twig' %}
+    {#{{ form(edit_form, { 'attr': { 'class': 'ui form' } }) }}#}
+    {{ form_start(edit_form, { 'attr': { 'class': 'ui form' } }) }}
+        {#<div class="inline field">#}
+            {#{{ form_label(form.published) }}#}
+            {#{{ form_errors(form.published) }}#}
+            {#{{ form_widget(form.published) }}#}
+            {#<div class="ui toggle checkbox">#}
+                {#<input type="checkbox">#}
+                {#<label>Toggle</label>#}
+            {#</div>#}
+        {#</div>#}
+    {{ form_end(edit_form) }}
+
+        <ul class="record_actions">
+            <li>
+                <a href="{{ path('admin_page') }}">
+                    Back to the list
+                </a>
+            </li>
+            <li>{{ form(delete_form) }}</li>
+        </ul>
+{% endblock %}

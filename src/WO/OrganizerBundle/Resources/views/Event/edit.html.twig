@@ -1,0 +1,17 @@
+{% block body -%}
+    {% form_theme edit_form 'WOOrganizerBundle:Form:fields.html.twig' %}
+    <div class="modal-dialog">
+        <div class="modal-content">
+            {{  form_start(edit_form, {'attr': {'class': 'form'}}) }}
+            <div class="modal-body">
+                <div class="te">
+                    {{ form_rest(edit_form) }}
+                    <a href="#" class="btn btn-danger deleteButton" data-href="{{ path("organizer_event_delete", {id: entity.id}) }}">Löschen</a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+                </div>
+            </div>
+            {{ form_end(edit_form) }}
+        </div>
+        <!-- /.modal-content -->
+    </div>
+{% endblock %}

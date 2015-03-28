@@ -1,0 +1,32 @@
+wo_organizer:
+    resource: "@WOOrganizerBundle/Controller/"
+    type:     annotation
+    prefix:   /admin/organizer
+
+wo_main:
+    resource: "@WOMainBundle/Controller/"
+    type:     annotation
+login_check:
+    path:   /login_check
+
+logout:
+    path:   /logout
+
+login:
+    path: /login
+    defaults: { _controller: WOMainBundle:Security:login }
+_welcome:
+    pattern:  /
+    defaults: { _controller: WOOrganizerBundle:Default:index }
+#organizer_index:
+#    path: /admin/organizer/{date}
+#    defaults: {_controller: WOOrganizerBundle:Default:index }
+
+homepage:
+    path: /{page}
+    defaults: { _controller: WOMainBundle:Default:index }
+
+show_page:
+    path: /{page}/{slug}
+    defaults: { _controller: WOMainBundle:Default:showPage }
+    methods: [GET]

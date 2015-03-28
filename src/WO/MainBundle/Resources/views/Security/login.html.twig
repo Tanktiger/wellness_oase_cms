@@ -1,0 +1,25 @@
+{% extends 'WOMainBundle::layout.html.twig' %}
+{% block title%}Wellness Oase Login{% endblock %}
+
+{% block body %}
+
+    {% if error %}
+        <div>{{ error.message }}</div>
+    {% endif %}
+
+    <div>
+        <div>
+            <form action="{{ path("login_check") }}" role="form" method="post">
+                <h2>Melde dich an</h2>
+                <input type="text" id="username" name="_username" placeholder="User" value="{{ last_username }}" required autofocus>
+                <input type="password" id="password" name="_password" placeholder="Password" required>
+                <label>
+                    <input type="checkbox" value="remember-me"> Login merken
+                </label>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+
+{% endblock %}

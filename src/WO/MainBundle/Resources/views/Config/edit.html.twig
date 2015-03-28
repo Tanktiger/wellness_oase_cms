@@ -1,0 +1,27 @@
+{% extends 'WOMainBundle::admin.html.twig' %}
+
+{% block title %}Seitenkonfiguration{% endblock %}
+
+{% block body -%}
+    <h1>Config edit</h1>
+
+    {% form_theme edit_form 'WOMainBundle:Form:fields.html.twig' %}
+    {{ form_start(edit_form, { 'attr': { 'class': 'ui form config' } }) }}
+    {#<div class="inline field">#}
+        {#<label>HTML Select</label>#}
+        {#<select id="wo_mainbundle_config_layout" name="wo_mainbundle_config[layout]">#}
+            {#<option value="semantic" selected="selected">semantic</option>#}
+            {#<option value="bootstrap">bootstrap</option>#}
+        {#</select>#}
+    {#</div>#}
+    {{ form_end(edit_form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('admin_config') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

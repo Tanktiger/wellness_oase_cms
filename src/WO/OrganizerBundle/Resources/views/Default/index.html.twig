@@ -1,0 +1,43 @@
+{% extends 'WOMainBundle::admin.html.twig' %}
+{% block body %}
+    <div class="row organizerDayOverview">
+        <div class="col-xs-12 col-md-4">
+            <div id="datepicker"></div>
+        </div>
+        <div class="col-xs-6 col-md-8 worktimes" data-spy="affix" data-offset-top="1" data-offset-bottom="10">
+            <span class="showNow">Aktuell gewähltes Datum: <b>{{ date }}</b></span>
+            <div class="list-group">
+                {% for employee in employees %}
+                    {% if worktimes[employee.id] is defined %}
+                        <a href="#"  data-href="{{ path("organizer_worktime_edit", {'id' : worktimes[employee.id].worktime_id }) }}"
+                        class="openModalButton list-group-item" style="display:inline-block;width:24%;background-color:{{ employee.color }}">
+                    {% else %}
+                        <a href="#" data-employee="{{ employee.id }}" data-date="{{ db_date }}" data-href="{{ path("organizer_worktime_new") }}"
+                           class="openModalButton list-group-item" style="display:inline-block;width:24%;background-color:{{ employee.color }}">
+                    {% endif %}
+                    <span >
+                        {{ employee.name }}:
+                        {% if worktimes[employee.id] is defined %}
+                            {{ worktimes[employee.id].timerange }}
+                        {% else %}
+                            Frei
+                        {% endif %}
+                    </span>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    </div>
+    <div class="overlay" style="display: none">
+        <img class="loading" src="{{ asset('bundles/wo/images/loading.gif') }}">
+    </div>
+    {#<hr class="full-width">#}
+    {{ table | raw }}
+    <script>
+        var date_day = {{ date_day }};
+        var date_month = {{ date_month }};
+        var date_year = {{ date_year }};
+    </script>
+{% endblock %}

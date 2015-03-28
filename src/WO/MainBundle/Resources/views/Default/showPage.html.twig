@@ -1,0 +1,14 @@
+{% extends 'WOMainBundle::layout.html.twig' %}
+{% block title %} {{ page.title }} {% endblock %}
+{% block body %}
+    <div class="editable">
+    {{ page.content | raw }}
+    </div>
+    {% if page.getChildren() is not empty %}
+        <ul>
+        {%  for children in page.getChildren() %}
+            <li><a href="{{ path('show_page', {'page': page.slug, 'slug': children.slug}) }}">{{ children.title }}</a></li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}
