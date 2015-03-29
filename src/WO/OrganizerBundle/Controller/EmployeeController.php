@@ -13,7 +13,7 @@ use WO\OrganizerBundle\Form\EmployeeType;
 /**
  * Employee controller.
  *
- * @Route("f/employee")
+ * @Route("/employee")
  */
 class EmployeeController extends Controller
 {

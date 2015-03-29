@@ -15,18 +15,14 @@ logout:
 login:
     path: /login
     defaults: { _controller: WOMainBundle:Security:login }
-_welcome:
-    pattern:  /
-    defaults: { _controller: WOOrganizerBundle:Default:index }
+#_welcome:
+#    pattern:  /
+#    defaults: { _controller: WOOrganizerBundle:Default:index }
 #organizer_index:
 #    path: /admin/organizer/{date}
 #    defaults: {_controller: WOOrganizerBundle:Default:index }
 
 homepage:
-    path: /{page}
+    path: /
     defaults: { _controller: WOMainBundle:Default:index }
 
-show_page:
-    path: /{page}/{slug}
-    defaults: { _controller: WOMainBundle:Default:showPage }
-    methods: [GET]

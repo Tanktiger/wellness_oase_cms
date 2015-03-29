@@ -36,7 +36,7 @@ class Config
      *
      * @ORM\Column(name="layout", type="string", length=50)
      */
-    private $layout = 'semantic';
+    private $layout = 'bootstrap';
 
 
     /**
