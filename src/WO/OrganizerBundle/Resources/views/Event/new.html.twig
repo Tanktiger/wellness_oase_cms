@@ -2,10 +2,72 @@
     {% form_theme form 'WOOrganizerBundle:Form:fields.html.twig' %}
     <div class="modal-dialog">
         <div class="modal-content">
-            {{  form_start(form, {'attr': {'class': 'form'}}) }}
+            <div class="modal-header">
+                <h4 class="modal-title">Termin erstellen</h4>
+            </div>
+            {{  form_start(form, {'attr': {'class': 'form', 'data-check-url':  path("organizer_event_check_form") }}) }}
             <div class="modal-body">
-                <div class="te">
-                    {{ form_widget(form) }}
+                <div class="te container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(form.day) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(form.dateStart) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(form.dateEnd) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(form.customer) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(form.telephone) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(form.info) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(form.extrainfo) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            {{ form_row(form.price) }}
+                        </div>
+                        <div class="col-md-8">
+                            {{ form_row(form.paymentmethod) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(form.employee) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(form.location) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(form.canceled) }}
+                        </div>
+                    </div>
+                    {#{{ form_widget(form) }}#}
+                    {{ form_rest(form) }}
                     <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
                 </div>
             </div>

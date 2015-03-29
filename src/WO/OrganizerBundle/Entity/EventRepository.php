@@ -23,4 +23,23 @@ class EventRepository extends EntityRepository
 
         return new ArrayCollection($q->getResult());
     }
+
+    /**
+     * @param \DateTime $start
+     * @param \DateTime $end
+     * @param int $locationId
+     * @return ArrayCollection
+     */
+    public function getAllBetweenStartAndEnd(\DateTime $start, \DateTime $end, $locationId) {
+        $q = $this
+            ->createQueryBuilder('e')
+            ->select('e')
+            ->where('e.dateStart BETWEEN :start AND :end')
+            ->andWhere('e.location = :location')
+            ->setParameter('start', $start->format('Y-m-d H:i:s'))
+            ->setParameter('end', $end->format('Y-m-d H:i:s'))
+            ->setParameter('location', $locationId)
+            ->getQuery();
+        return new ArrayCollection($q->getResult());
+    }
 }

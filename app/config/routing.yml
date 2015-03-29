@@ -18,9 +18,9 @@ login:
 #_welcome:
 #    pattern:  /
 #    defaults: { _controller: WOOrganizerBundle:Default:index }
-#organizer_index:
-#    path: /admin/organizer/{date}
-#    defaults: {_controller: WOOrganizerBundle:Default:index }
+#organizer_event_check_form:
+#    path: /admin/organizer/event/check_form
+#    defaults: {_controller: WOOrganizerBundle:Event:checkForm }
 
 homepage:
     path: /

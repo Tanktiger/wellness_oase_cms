@@ -4,16 +4,16 @@
         <div class="col-xs-12 col-md-4">
             <div id="datepicker"></div>
         </div>
-        <div class="col-xs-6 col-md-8 worktimes" data-spy="affix" data-offset-top="1" data-offset-bottom="10">
+        <div class="col-xs-6 col-md-8 worktimes">
             <span class="showNow">Aktuell gewähltes Datum: <b>{{ date }}</b></span>
             <div class="list-group">
                 {% for employee in employees %}
                     {% if worktimes[employee.id] is defined %}
                         <a href="#"  data-href="{{ path("organizer_worktime_edit", {'id' : worktimes[employee.id].worktime_id }) }}"
-                        class="openModalButton list-group-item" style="display:inline-block;width:24%;background-color:{{ employee.color }}">
+                        class="openModalButton list-group-item" style="background-color:{{ employee.color }}">
                     {% else %}
                         <a href="#" data-employee="{{ employee.id }}" data-date="{{ db_date }}" data-href="{{ path("organizer_worktime_new") }}"
-                           class="openModalButton list-group-item" style="display:inline-block;width:24%;background-color:{{ employee.color }}">
+                           class="openModalButton list-group-item" style="background-color:{{ employee.color }}">
                     {% endif %}
                     <span >
                         {{ employee.name }}:

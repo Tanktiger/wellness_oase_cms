@@ -39,6 +39,7 @@ class EventType extends AbstractType
                                                 'date_format' => 'yyyy-MM-dd',
                                                 'label' => 'Ende'))
             ->add('customer', null, array('label' => 'Kunde'))
+            ->add('telephone', null, array('label' => 'Telefon'))
             ->add('info', null, array('label' => 'Anwendung'))
             ->add('extrainfo', null, array('label' => 'Zusätzliche Info'))
             ->add('price', null, array('label' => 'Preis'))

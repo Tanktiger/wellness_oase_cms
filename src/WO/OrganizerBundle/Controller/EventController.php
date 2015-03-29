@@ -271,4 +271,43 @@ class EventController extends Controller
             ->getForm()
         ;
     }
+
+    /**
+     * @Route("/check_form", name="organizer_event_check_form")
+     * @Method("POST")
+     * @Template()
+     */
+    public function checkFormAction(Request $request) {
+        $success = false;
+        $startMinute = $request->get('dateStartMinute');
+        $startHour = $request->get('dateStartHour');
+        $endMinute = $request->get('dateEndMinute');
+        $endHour = $request->get('dateEndHour');
+        $date = $request->get('date');
+        $locId = $request->get('locationId');
+
+        if ($this->checkIsset($endMinute)
+            && $this->checkIsset($endHour)
+            && $this->checkIsset($startMinute)
+            && $this->checkIsset($startHour)
+            && $this->checkIsset($date)
+            && $this->checkIsset($locId)
+        ) {
+            $endTime = $date . ' ' . $endHour . ':' . $endMinute . ':00';
+            $endTime = new \DateTime($endTime);
+            $startTime = $date . ' ' . $startHour . ':' . $startMinute . ':00';
+            $startTime = new \DateTime($startTime);
+
+            $em = $this->getDoctrine()->getManager();
+            $entities = $em->getRepository('WOOrganizerBundle:Event')->getAllBetweenStartAndEnd($startTime, $endTime, $locId);
+            if ($entities->count() == 0) {
+                $success = true;
+            }
+        }
+        return new JsonResponse(array('success' => $success));
+    }
+
+    private function checkIsset($value) {
+        return (isset($value) && $value != '');
+    }
 }

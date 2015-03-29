@@ -2,9 +2,71 @@
     {% form_theme edit_form 'WOOrganizerBundle:Form:fields.html.twig' %}
     <div class="modal-dialog">
         <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Termin bearbeiten</h4>
+            </div>
             {{  form_start(edit_form, {'attr': {'class': 'form'}}) }}
             <div class="modal-body">
                 <div class="te">
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(edit_form.day) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(edit_form.dateStart) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(edit_form.dateEnd) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(edit_form.customer) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(edit_form.telephone) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(edit_form.info) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(edit_form.extrainfo) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            {{ form_row(edit_form.price) }}
+                        </div>
+                        <div class="col-md-8">
+                            {{ form_row(edit_form.paymentmethod) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(edit_form.employee) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(edit_form.location) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(edit_form.canceled) }}
+                        </div>
+                    </div>
+                    {#{{ form_widget(form) }}#}
                     {{ form_rest(edit_form) }}
                     <a href="#" class="btn btn-danger deleteButton" data-href="{{ path("organizer_event_delete", {id: entity.id}) }}">Löschen</a>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>

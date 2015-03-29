@@ -46,7 +46,7 @@ class Event
     /**
      * @var string
      *
-     * @ORM\Column(name="info", type="text", nullable=true)
+     * @ORM\Column(name="info", type="string", length=255, nullable=true)
      */
     private $info;
 
@@ -102,6 +102,12 @@ class Event
      * @ORM\JoinColumn(name="paymentmethod_id", referencedColumnName="id",nullable=true)
      **/
     private $paymentmethod;
+
+    /**
+     * @var string
+     * @ORM\Column(name="telephone", type="string", length=50, nullable=true)
+     */
+    private $telephone;
 
     /**
      * @ORM\ManyToOne(targetEntity="WO\MainBundle\Entity\User", inversedBy="events", fetch="EXTRA_LAZY")
@@ -384,6 +390,22 @@ class Event
     public function setExtrainfo($extrainfo)
     {
         $this->extrainfo = $extrainfo;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTelephone()
+    {
+        return $this->telephone;
+    }
+
+    /**
+     * @param string $telephone
+     */
+    public function setTelephone($telephone)
+    {
+        $this->telephone = $telephone;
     }
 
 }
