@@ -1,0 +1,113 @@
+body {
+    /*margin-top: 3%;*/
+    font-size:16px;
+}
+.conatiner {
+    margin-left: 2%;
+    margin-right: 2%;
+}
+.full-width {
+    width: 100%;
+}
+
+.low-width {
+    width: 1%;
+}
+.organizerDayOverview {
+    max-height: 8%;
+}
+
+.organizer-editable-cell:hover {
+    border: 1px solid black;
+}
+
+#organizer td {
+    padding: 1px;
+}
+.overlay
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 9999;
+    color: white;
+    display: inline-block;
+}
+img.loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 500px;
+    height: 500px;
+    margin-top: -250px; /* Half the height */
+    margin-left: -250px; /* Half the width */
+}
+.table-responsive{
+    padding-top: 10px;
+}
+#modal #wo_organizerbundle_event_dateStart_date,
+#modal #wo_organizerbundle_event_dateEnd_date,
+#modal #wo_organizerbundle_event_day_time
+{
+    display: none;
+}
+
+.canceled {
+    background: repeating-linear-gradient(
+            45deg,
+            rgba(255, 255, 255, 0.11),
+            rgba(255, 255, 255, 0.10) 10px,
+            #ffffff 10px,
+            #ffffff 20px
+    );
+}
+
+.worktimes {
+    margin-top: 6%;
+}
+.list-group-item {
+    display: inline-block;
+    width: 34%;
+}
+.container-wrapper {
+    margin-top: 2%;
+}
+.nav-pills>li>a.btn-danger {
+    color:white;
+}
+.nav-pills>li>a.btn-danger:hover {
+    color:black;
+}
+/*.worktimes.affix {*/
+    /*margin: 0;*/
+    /*left: 25%;*/
+    /*top:0;*/
+/*}*/
+/*.worktimes.affix .showNow {*/
+    /*background-color: lightgray;*/
+/*}*/
+/**
+Tiny MCE anpassungen
+**/
+.mce-path {/* CSS */
+    display: none !important;
+}
+/**
+Tiny MCE anpassungen Ende
+**/
+/**
+Jquery UI anpassungen
+**/
+.ui-datepicker .ui-datepicker-title select {
+    color: black;
+}
+ul.ui-autocomplete.ui-widget {
+    list-style: none;
+    padding: 1%;
+}
+/**
+Jquery UI anpassungen Ende
+**/
