@@ -1,0 +1,16 @@
+{% extends 'WOMainBundle::admin.html.twig' %}
+{% form_theme edit_form 'WOOrganizerBundle:Form:fields.html.twig' %}
+{% block body -%}
+    <h1>Anwednung editieren</h1>
+
+    {{ form(edit_form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('admin_service') }}">
+            zurück zur Liste
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

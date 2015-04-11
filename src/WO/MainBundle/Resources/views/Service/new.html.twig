@@ -1,0 +1,15 @@
+{% extends 'WOMainBundle::admin.html.twig' %}
+{% form_theme form 'WOOrganizerBundle:Form:fields.html.twig' %}
+{% block body -%}
+    <h1>Anwendung hinzufügen</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('admin_service') }}">
+            zurück zur Liste
+        </a>
+    </li>
+</ul>
+{% endblock %}

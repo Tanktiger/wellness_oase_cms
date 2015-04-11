@@ -1,0 +1,39 @@
+{% extends 'WOMainBundle::admin.html.twig' %}
+{% block body -%}
+    <h1>Anwedung</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <td>{{ entity.name }}</td>
+            </tr>
+            <tr>
+                <th>Preis</th>
+                <td>{{ entity.price }}</td>
+            </tr>
+            <tr>
+                <th>Beschreibung</th>
+                <td>{{ entity.description }}</td>
+            </tr>
+            <tr>
+                <th>Dauer</th>
+                <td>{{ entity.duration }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('admin_service') }}">
+            Zurück zur Liste
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('admin_service_edit', { 'id': entity.id }) }}">
+            Editieren
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

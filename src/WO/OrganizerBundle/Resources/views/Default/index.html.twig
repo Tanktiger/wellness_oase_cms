@@ -1,10 +1,10 @@
-{% extends 'WOMainBundle::admin.html.twig' %}
+{% extends 'WOOrganizerBundle::layout.html.twig' %}
 {% block body %}
     <div class="row organizerDayOverview">
         <div class="col-xs-12 col-md-4">
             <div id="datepicker"></div>
         </div>
-        <div class="col-xs-6 col-md-8 worktimes">
+        <div class="col-xs-6 col-md-6 worktimes">
             <span class="showNow">Aktuell gewähltes Datum: <b>{{ date }}</b></span>
             <div class="list-group">
                 {% for employee in employees %}
@@ -33,11 +33,17 @@
     <div class="overlay" style="display: none">
         <img class="loading" src="{{ asset('bundles/wo/images/loading.gif') }}">
     </div>
-    {#<hr class="full-width">#}
     {{ table | raw }}
     <script>
         var date_day = {{ date_day }};
         var date_month = {{ date_month }};
         var date_year = {{ date_year }};
+    </script>
+    <script type="application/javascript">
+        var availableServices = [
+            {% for service in services %}
+            "{{ service|e }}",
+            {% endfor %}
+        ];
     </script>
 {% endblock %}

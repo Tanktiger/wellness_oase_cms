@@ -118,11 +118,12 @@ class EventController extends Controller
             }
         }
         $form = $this->createCreateForm($entity);
-
+        $services = $this->getAllServices();
 //        $form->add('day', 'hidden', array('data' => isset($options['data']) ? $options['data']->getDay()->format('Y-m-d') : new \Datetime('now')));
         return array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'services' => $services
         );
     }
 
@@ -170,11 +171,12 @@ class EventController extends Controller
 
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
-
+        $services = $this->getAllServices();
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'services' => $services
         );
     }
 
@@ -309,5 +311,15 @@ class EventController extends Controller
 
     private function checkIsset($value) {
         return (isset($value) && $value != '');
+    }
+
+    private function getAllServices() {
+        $em = $this->getDoctrine()->getManager();
+        $entities = $em->getRepository('WOMainBundle:Service')->findAll();
+        $result = array();
+        foreach ($entities as $key => $service) {
+            $result[] = $service->getName();
+        }
+        return $result;
     }
 }

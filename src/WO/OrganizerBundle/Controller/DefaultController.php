@@ -41,7 +41,9 @@ class DefaultController extends Controller
                     'worktimes' => $worktimes, 'db_date' => $date->format('Y-m-d'),
                     'date_year' => $date->format('Y'),
                     'date_day' => $date->format('d'),
-                    'date_month' => $date->format('m'));
+                    'date_month' => $date->format('m'),
+                    'services' => $this->getAllServices()
+        );
     }
 
     /**
@@ -59,5 +61,14 @@ class DefaultController extends Controller
         }
         $d = \DateTime::createFromFormat($format, $date);
         return $d && $d->format($format) == $date;
+    }
+    private function getAllServices() {
+        $em = $this->getDoctrine()->getManager();
+        $entities = $em->getRepository('WOMainBundle:Service')->findAll();
+        $result = array();
+        foreach ($entities as $key => $service) {
+            $result[] = $service->getName();
+        }
+        return $result;
     }
 }

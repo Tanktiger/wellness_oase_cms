@@ -1,0 +1,40 @@
+{% extends 'WOMainBundle::admin.html.twig' %}
+
+{% block body -%}
+    <h1>Sonderangebot</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Start</th>
+                <td>{{ entity.offerStart|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Ende</th>
+                <td>{{ entity.offerEnd|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Anwendung</th>
+                <td>{{ entity.service }}</td>
+            </tr>
+            <tr>
+                <th>Angebotspreis</th>
+                <td>{{ entity.offerPrice }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('admin_offer') }}">
+            Zurück zur Liste
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('admin_offer_edit', { 'id': entity.id }) }}">
+            editieren
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

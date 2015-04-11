@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="worktime")
  * @ORM\Entity(repositoryClass="WO\OrganizerBundle\Entity\WorktimeRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Worktime
 {
@@ -36,10 +37,28 @@ class Worktime
     private $timerange;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="start", type="time")
+     */
+    private $start;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="end", type="time")
+     */
+    private $end;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Employee", inversedBy="worktime")
      * @ORM\JoinColumn(name="employee_id", referencedColumnName="id")
      **/
     private $employee;
+
+    public function __construct() {
+
+    }
 
     /**
      * @return mixed
@@ -112,4 +131,51 @@ class Worktime
     {
         return $this->timerange;
     }
+
+    /**
+     * @return \DateTime
+     */
+    public function getEnd()
+    {
+        return $this->end;
+    }
+
+    /**
+     * @param \DateTime $end
+     */
+    public function setEnd($end)
+    {
+        $this->end = $end;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getStart()
+    {
+        return $this->start;
+    }
+
+    /**
+     * @param \DateTime $start
+     */
+    public function setStart($start)
+    {
+        $this->start = $start;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist() {
+        $this->setTimerange($this->getStart()->format('H:i') . ' - ' . $this->getEnd()->format('H:i'));
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function preUpdate() {
+        $this->setTimerange($this->getStart()->format('H:i') . ' - ' . $this->getEnd()->format('H:i'));
+    }
+
 }

@@ -19,7 +19,13 @@ class WorktimeType extends AbstractType
             ->add('date', 'date', array('read_only' => true,
                 'widget' => 'single_text',
                 'label' => 'Tag'))
-            ->add('timerange', null, array('label' => 'Arbeitszeit'))
+            ->add('start', null, array('label' => 'Arbeitszeit Anfang',
+                                        'minutes' => array(0,15,30,45),
+                                        'hours' => range(8,21,1),))
+            ->add('end', null, array('label' => 'Arbeitszeit Ende',
+                                                'minutes' => array(0,15,30,45),
+                                                'hours' => range(8,21,1),))
+//            ->add('timerange', null, array('label' => 'Arbeitszeit'))
             ->add('employee', null, array('label' => 'Mitarbeiter', 'read_only' => true))
         ;
     }
