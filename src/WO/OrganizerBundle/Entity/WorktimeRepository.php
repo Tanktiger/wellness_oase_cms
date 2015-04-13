@@ -23,7 +23,10 @@ class WorktimeRepository extends EntityRepository
         $results = new ArrayCollection($q->getResult());
         $return = array();
         foreach( $results as $result) {
-            $return[$result->getEmployee()->getId()] = array('timerange' => $result->getTimerange(), 'worktime_id' => $result->getId());
+            $return[$result->getEmployee()->getId()] = array('timerange' => $result->getTimerange(),
+                                                                'worktime_id' => $result->getId(),
+                                                            'location' => $result->getLocation()
+            );
         }
         return $return;
     }

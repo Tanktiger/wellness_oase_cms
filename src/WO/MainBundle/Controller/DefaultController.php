@@ -15,9 +15,14 @@ class DefaultController extends Controller
      * @Route("/", name="homepage")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        return array();
+        if($request->isXmlHttpRequest()) {
+            return new JsonResponse(array(), 200, array());
+        } else {
+            return $this->redirect($this->generateUrl('organizer_index'));
+        }
+
     }
 
     public function showOfflinePageAction() {

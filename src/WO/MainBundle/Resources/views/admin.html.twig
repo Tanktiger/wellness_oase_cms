@@ -29,12 +29,12 @@
                         <a href="{{ path("organizer_index") }}" class="">Belegungsplan</a>
                     </li>
                     <li>
+                        <a href="{{ path("admin_service") }}" class="">Anwendungen</a>
+                    </li>
+                    <li>
                         <a href="{{ path("admin_offer") }}" class="">Sonderangebote</a>
                     </li>
                     {% if is_granted('ROLE_SUPER_ADMIN') %}
-                        <li>
-                            <a href="{{ path("admin_service") }}" class="">Anwendungen</a>
-                        </li>
                         <li >
                             <a href="{{ path("admin_user") }}" class="">Benutzer</a>
                         </li>

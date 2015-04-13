@@ -16,21 +16,17 @@
         <li >
             <a href="{{ path("organizer_index") }}" class="">Belegungsplan</a>
         </li>
-        <li>
-            <a href="{{ path("admin_service") }}" class="">Anwendungen</a>
-        </li>
         <li >
             <a href="{{ path("admin_user") }}" class="">Benutzer</a>
-        </li>
-        <li >
-            <a href="{{ path("admin_page") }}" class="">Seiten</a>
         </li>
         <li >
             <a href="{{ path("admin_config") }}" >Konfiguration</a>
         </li>
     {% endif %}
     <li><a class="btn btn-danger" href="{{ path("logout") }}">Logout</a></li>
-
+    <li>
+        <a href="{{ path("admin_service") }}" class="">Anwendungen</a>
+    </li>
     <li>
         <a href="{{ path("admin_offer") }}" class="">Sonderangebote</a>
     </li>

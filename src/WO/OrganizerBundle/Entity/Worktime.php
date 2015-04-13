@@ -51,6 +51,13 @@ class Worktime
     private $end;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="location", type="string", length=255, nullable=true)
+     */
+    private $location;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Employee", inversedBy="worktime")
      * @ORM\JoinColumn(name="employee_id", referencedColumnName="id")
      **/
@@ -162,6 +169,22 @@ class Worktime
     public function setStart($start)
     {
         $this->start = $start;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
+
+    /**
+     * @param string $location
+     */
+    public function setLocation($location)
+    {
+        $this->location = $location;
     }
 
     /**

@@ -27,6 +27,7 @@ class WorktimeType extends AbstractType
                                                 'hours' => range(8,21,1),))
 //            ->add('timerange', null, array('label' => 'Arbeitszeit'))
             ->add('employee', null, array('label' => 'Mitarbeiter', 'read_only' => true))
+            ->add('location', null, array('label' => 'Ort'))
         ;
     }
     

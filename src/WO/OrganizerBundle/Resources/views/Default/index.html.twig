@@ -19,6 +19,9 @@
                         {{ employee.name }}:
                         {% if worktimes[employee.id] is defined %}
                             {{ worktimes[employee.id].timerange }}
+                            {% if worktimes[employee.id].location is defined and worktimes[employee.id].location|length > 0 %}
+                                - {{ worktimes[employee.id].location }}
+                            {% endif %}
                         {% else %}
                             Frei
                         {% endif %}

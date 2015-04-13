@@ -25,6 +25,7 @@ class TableHelper {
     public function buildTableForDate($date) {
         $locations = $this->em->getRepository('WOOrganizerBundle:Location')->findAll();
         $events = $this->em->getRepository('WOOrganizerBundle:Event')->findByDate($date);
+        $worktimes = $this->em->getRepository('WOOrganizerBundle:Worktime')->findBy(array('date' => new \DateTime($date)));
 
         $period = $this->getTimePeriod($date." 08:00:00",$date." 20:00:00");
         $results = $locationArr = $tableHeaders = array();
