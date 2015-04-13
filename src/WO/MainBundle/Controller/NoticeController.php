@@ -7,21 +7,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use WO\MainBundle\Entity\Offer;
-use WO\MainBundle\Form\OfferType;
+use WO\MainBundle\Entity\Notice;
+use WO\MainBundle\Form\NoticeType;
 
 /**
- * Offer controller.
+ * Notice controller.
  *
- * @Route("/admin/offer")
+ * @Route("/admin/notice")
  */
-class OfferController extends Controller
+class NoticeController extends Controller
 {
 
     /**
-     * Lists all Offer entities.
+     * Lists all Notice entities.
      *
-     * @Route("/", name="admin_offer")
+     * @Route("/", name="admin_notice")
      * @Method("GET")
      * @Template()
      */
@@ -29,22 +29,32 @@ class OfferController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('WOMainBundle:Offer')->findAll();
+        $entities = $em->getRepository('WOMainBundle:Notice')->findBy(array(),array('createDate' => 'DESC'));
+        $entity = new Notice();
+        $user = $this->getUser();
+        $entity->setUser($user);
+        $form   = $this->createCreateForm($entity);
+        $result = array();
+        foreach ($entities as $key => $entity) {
+            $result[$key]['entity'] = $entity;
+            $result[$key]['deleteform'] = $this->createDeleteForm($entity->getId())->createView();
+        }
 
         return array(
-            'entities' => $entities,
+            'entities' => $result,
+            'form'   => $form->createView(),
         );
     }
     /**
-     * Creates a new Offer entity.
+     * Creates a new Notice entity.
      *
-     * @Route("/", name="admin_offer_create")
+     * @Route("/", name="admin_notice_create")
      * @Method("POST")
-     * @Template("WOMainBundle:Offer:new.html.twig")
+     * @Template("WOMainBundle:Notice:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new Offer();
+        $entity = new Notice();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -53,7 +63,8 @@ class OfferController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_offer_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('admin_notice'));
+//            return $this->redirect($this->generateUrl('admin_notice_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -63,16 +74,16 @@ class OfferController extends Controller
     }
 
     /**
-     * Creates a form to create a Offer entity.
+     * Creates a form to create a Notice entity.
      *
-     * @param Offer $entity The entity
+     * @param Notice $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Offer $entity)
+    private function createCreateForm(Notice $entity)
     {
-        $form = $this->createForm(new OfferType(), $entity, array(
-            'action' => $this->generateUrl('admin_offer_create'),
+        $form = $this->createForm(new NoticeType(), $entity, array(
+            'action' => $this->generateUrl('admin_notice_create'),
             'method' => 'POST',
         ));
 
@@ -82,15 +93,17 @@ class OfferController extends Controller
     }
 
     /**
-     * Displays a form to create a new Offer entity.
+     * Displays a form to create a new Notice entity.
      *
-     * @Route("/new", name="admin_offer_new")
+     * @Route("/new", name="admin_notice_new")
      * @Method("GET")
      * @Template()
      */
     public function newAction()
     {
-        $entity = new Offer();
+        $entity = new Notice();
+        $user = $this->getUser();
+        $entity->setUser($user);
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -100,9 +113,9 @@ class OfferController extends Controller
     }
 
     /**
-     * Finds and displays a Offer entity.
+     * Finds and displays a Notice entity.
      *
-     * @Route("/{id}", name="admin_offer_show")
+     * @Route("/{id}", name="admin_notice_show")
      * @Method("GET")
      * @Template()
      */
@@ -110,10 +123,10 @@ class OfferController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('WOMainBundle:Offer')->find($id);
+        $entity = $em->getRepository('WOMainBundle:Notice')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Offer entity.');
+            throw $this->createNotFoundException('Unable to find Notice entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -125,9 +138,9 @@ class OfferController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Offer entity.
+     * Displays a form to edit an existing Notice entity.
      *
-     * @Route("/{id}/edit", name="admin_offer_edit")
+     * @Route("/{id}/edit", name="admin_notice_edit")
      * @Method("GET")
      * @Template()
      */
@@ -135,10 +148,10 @@ class OfferController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('WOMainBundle:Offer')->find($id);
+        $entity = $em->getRepository('WOMainBundle:Notice')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Offer entity.');
+            throw $this->createNotFoundException('Unable to find Notice entity.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -152,38 +165,38 @@ class OfferController extends Controller
     }
 
     /**
-    * Creates a form to edit a Offer entity.
+    * Creates a form to edit a Notice entity.
     *
-    * @param Offer $entity The entity
+    * @param Notice $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Offer $entity)
+    private function createEditForm(Notice $entity)
     {
-        $form = $this->createForm(new OfferType(), $entity, array(
-            'action' => $this->generateUrl('admin_offer_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new NoticeType(), $entity, array(
+            'action' => $this->generateUrl('admin_notice_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Speichern'));
+        $form->add('submit', 'submit', array('label' => 'Update'));
 
         return $form;
     }
     /**
-     * Edits an existing Offer entity.
+     * Edits an existing Notice entity.
      *
-     * @Route("/{id}", name="admin_offer_update")
+     * @Route("/{id}", name="admin_notice_update")
      * @Method("PUT")
-     * @Template("WOMainBundle:Offer:edit.html.twig")
+     * @Template("WOMainBundle:Notice:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('WOMainBundle:Offer')->find($id);
+        $entity = $em->getRepository('WOMainBundle:Notice')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Offer entity.');
+            throw $this->createNotFoundException('Unable to find Notice entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -193,7 +206,7 @@ class OfferController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_offer_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('admin_notice_edit', array('id' => $id)));
         }
 
         return array(
@@ -203,9 +216,9 @@ class OfferController extends Controller
         );
     }
     /**
-     * Deletes a Offer entity.
+     * Deletes a Notice entity.
      *
-     * @Route("/{id}", name="admin_offer_delete")
+     * @Route("/{id}", name="admin_notice_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -215,21 +228,21 @@ class OfferController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('WOMainBundle:Offer')->find($id);
+            $entity = $em->getRepository('WOMainBundle:Notice')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Offer entity.');
+                throw $this->createNotFoundException('Unable to find Notice entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('admin_offer'));
+        return $this->redirect($this->generateUrl('admin_notice'));
     }
 
     /**
-     * Creates a form to delete a Offer entity by id.
+     * Creates a form to delete a Notice entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -238,7 +251,7 @@ class OfferController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('admin_offer_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('admin_notice_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Löschen'))
             ->getForm()

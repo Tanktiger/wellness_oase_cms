@@ -77,7 +77,7 @@ class ServiceController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'Speichern'));
 
         return $form;
     }
@@ -166,7 +166,7 @@ class ServiceController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array('label' => 'Speichern'));
 
         return $form;
     }
@@ -241,7 +241,7 @@ class ServiceController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('admin_service_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array('label' => 'Löschen'))
             ->getForm()
         ;
     }

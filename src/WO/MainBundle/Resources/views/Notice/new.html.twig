@@ -1,0 +1,15 @@
+{% extends 'WOMainBundle::admin.html.twig' %}
+{% form_theme form 'WOOrganizerBundle:Form:fields.html.twig' %}
+{% block body -%}
+    <h1>Notice creation</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('admin_notice') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

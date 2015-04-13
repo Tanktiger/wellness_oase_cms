@@ -109,12 +109,18 @@ class User implements UserInterface, \Serializable
      **/
     private $events;
 
+    /**
+     * @ORM\OneToMany(targetEntity="WO\MainBundle\Entity\Notice", mappedBy="user")
+     **/
+    private $notices;
+
     public function __construct()
     {
         $this->roles = new ArrayCollection();
         $this->createDate = new \DateTime();
         $this->salt = md5(uniqid(null, true));
         $this->events = new ArrayCollection();
+        $this->notices = new ArrayCollection();
     }
 
     public function getRoles()

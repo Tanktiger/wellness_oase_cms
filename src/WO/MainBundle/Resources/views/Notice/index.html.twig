@@ -1,0 +1,24 @@
+{% extends 'WOMainBundle::admin.html.twig' %}
+{% form_theme form 'WOOrganizerBundle:Form:fields.html.twig' %}
+{% block body -%}
+    <h3>Notizzettel</h3>
+    <div class="container-fluid">
+        {{ form(form) }}
+    </div>
+
+    <h3>Bisherige Nachrichten:</h3>
+    {% for entity in entities %}
+        <blockquote>
+            <p>{{ entity.entity.text|nl2br }}</p>
+            <footer>Nachricht vom {% if entity.entity.createDate %}{{ entity.entity.createDate|date('d.m.Y H:i:s') }}{% endif %} {{ form(entity.deleteform) }}</footer>
+        </blockquote>
+    {% endfor %}
+    {#<a href="{{ path('admin_notice_delete', {'id': entity.id}) }}">Löschen</a>#}
+        {#<ul>#}
+        {#<li>#}
+            {#<a href="{{ path('admin_notice_new') }}">#}
+                {#Create a new entry#}
+            {#</a>#}
+        {#</li>#}
+    {#</ul>#}
+    {% endblock %}
