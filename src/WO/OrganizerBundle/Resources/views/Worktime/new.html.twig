@@ -10,7 +10,47 @@
             {{  form_start(form, {'attr': {'class': 'form'}}) }}
             <div class="modal-body">
                 <div class="te">
-                    {{ form_widget(form) }}
+                    {#{{ form_widget(form) }}#}
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(form.date) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(form.start) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(form.end) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(form.employee) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(form.location) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="cols-xs-12 col-md-3">
+                            {{ form_row(form.free) }}
+                        </div>
+                        <div class="cols-xs-12 col-md-3">
+                            {{ form_row(form.vacation) }}
+                        </div>
+                        <div class="cols-xs-12 col-md-3">
+                            {{ form_row(form.sick) }}
+                        </div>
+                        <div class="cols-xs-12 col-md-3">
+                            {{ form_row(form.onDemand) }}
+                        </div>
+                    </div>
+                    {{ form_rest(form) }}
                     <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
                 </div>
             </div>

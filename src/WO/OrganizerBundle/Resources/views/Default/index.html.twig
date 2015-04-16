@@ -9,7 +9,7 @@
             <div class="list-group">
                 {% for employee in employees %}
                     {% if worktimes[employee.id] is defined %}
-                        <a href="#"  data-href="{{ path("organizer_worktime_edit", {'id' : worktimes[employee.id].worktime_id }) }}"
+                        <a href="#"  data-href="{{ path("organizer_worktime_edit", {'id' : worktimes[employee.id].id }) }}"
                         class="openModalButton list-group-item" style="background-color:{{ employee.color }}">
                     {% else %}
                         <a href="#" data-employee="{{ employee.id }}" data-date="{{ db_date }}" data-href="{{ path("organizer_worktime_new") }}"
@@ -18,12 +18,22 @@
                     <span >
                         {{ employee.name }}:
                         {% if worktimes[employee.id] is defined %}
-                            {{ worktimes[employee.id].timerange }}
-                            {% if worktimes[employee.id].location is defined and worktimes[employee.id].location|length > 0 %}
-                                - {{ worktimes[employee.id].location }}
+                            {% if worktimes[employee.id].free %}
+                                Frei
+                            {% elseif worktimes[employee.id].sick %}
+                                Krank
+                            {% elseif worktimes[employee.id].vacation %}
+                                Urlaub
+                            {% elseif worktimes[employee.id].onDemand %}
+                                Bei Bedarf
+                            {% else %}
+                                {{ worktimes[employee.id].timerange }}
+                                {% if worktimes[employee.id].location is defined and worktimes[employee.id].location|length > 0 %}
+                                    - {{ worktimes[employee.id].location }}
+                                {% endif %}
                             {% endif %}
                         {% else %}
-                            Frei
+                            &nbsp;
                         {% endif %}
                     </span>
                 </a>

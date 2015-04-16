@@ -28,6 +28,10 @@ class WorktimeType extends AbstractType
 //            ->add('timerange', null, array('label' => 'Arbeitszeit'))
             ->add('employee', null, array('label' => 'Mitarbeiter', 'read_only' => true))
             ->add('location', null, array('label' => 'Ort'))
+            ->add('free', null, array('label' => 'Frei'))
+            ->add('vacation', null, array('label' => 'Urlaub'))
+            ->add('sick', null, array('label' => 'Krank'))
+            ->add('onDemand', null, array('label' => 'Bei Bedarf'))
         ;
     }
     

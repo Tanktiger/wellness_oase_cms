@@ -10,7 +10,48 @@
             {{  form_start(edit_form, {'attr': {'class': 'form'}}) }}
             <div class="modal-body">
                 <div class="te">
-                    {{ form_widget(edit_form) }}
+                    {#{{ form_widget(edit_form) }}#}
+                    {#{{ form_widget(form) }}#}
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(edit_form.date) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(edit_form.start) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(edit_form.end) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(edit_form.employee) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(edit_form.location) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="cols-xs-12 col-md-3">
+                            {{ form_row(edit_form.free) }}
+                        </div>
+                        <div class="cols-xs-12 col-md-3">
+                            {{ form_row(edit_form.vacation) }}
+                        </div>
+                        <div class="cols-xs-12 col-md-3">
+                            {{ form_row(edit_form.sick) }}
+                        </div>
+                        <div class="cols-xs-12 col-md-3">
+                            {{ form_row(edit_form.onDemand) }}
+                        </div>
+                    </div>
+                    {{ form_rest(edit_form) }}
                     <a href="#" class="btn btn-danger deleteButton" data-href="{{ path("organizer_worktime_delete", {id: entity.id}) }}">Löschen</a>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>

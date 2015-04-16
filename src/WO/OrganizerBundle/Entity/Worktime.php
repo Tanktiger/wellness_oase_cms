@@ -63,6 +63,34 @@ class Worktime
      **/
     private $employee;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="free", type="boolean", nullable=true)
+     */
+    private $free = null;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="vacation", type="boolean", nullable=true)
+     */
+    private $vacation = null;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="sick", type="boolean", nullable=true)
+     */
+    private $sick = null;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="on_demand", type="boolean", nullable=true)
+     */
+    private $onDemand = null;
+
     public function __construct() {
 
     }
@@ -185,6 +213,70 @@ class Worktime
     public function setLocation($location)
     {
         $this->location = $location;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isFree()
+    {
+        return $this->free;
+    }
+
+    /**
+     * @param boolean $free
+     */
+    public function setFree($free)
+    {
+        $this->free = $free;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isOnDemand()
+    {
+        return $this->onDemand;
+    }
+
+    /**
+     * @param boolean $onDemand
+     */
+    public function setOnDemand($onDemand)
+    {
+        $this->onDemand = $onDemand;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isSick()
+    {
+        return $this->sick;
+    }
+
+    /**
+     * @param boolean $sick
+     */
+    public function setSick($sick)
+    {
+        $this->sick = $sick;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isVacation()
+    {
+        return $this->vacation;
+    }
+
+    /**
+     * @param boolean $vacation
+     */
+    public function setVacation($vacation)
+    {
+        $this->vacation = $vacation;
     }
 
     /**
