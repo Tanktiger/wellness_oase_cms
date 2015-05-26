@@ -32,6 +32,9 @@
                                     - {{ worktimes[employee.id].location }}
                                 {% endif %}
                             {% endif %}
+                            {% if worktimes[employee.id].info %}
+                                &nbsp;<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                            {% endif %}
                         {% else %}
                             &nbsp;
                         {% endif %}

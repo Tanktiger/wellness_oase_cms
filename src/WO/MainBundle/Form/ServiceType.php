@@ -16,6 +16,7 @@ class ServiceType extends AbstractType
     {
         $builder
             ->add('name', null, array('label' => 'Name'))
+            ->add('shortname', null, array('label' => 'Abkürzung'))
             ->add('price', null, array('label' => 'Preis in €'))
             ->add('description', null, array('label' => 'Beschreibung'))
             ->add('duration', null, array('label' => 'Dauer in min'))

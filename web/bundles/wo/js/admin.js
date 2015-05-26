@@ -40,6 +40,7 @@ $(document).on('ready', function() {
     if (typeof date_day != 'undefined' && typeof date_month != 'undefined' && typeof date_year != 'undefined') {
         $('#datepicker').datepicker("setDate", new Date(date_year,date_month-1,date_day) );
     }
+    //Neues Event
     $(document).on('click', '.openModalButton', function() {
         toggleOverlay();
         $.ajax({
@@ -59,6 +60,7 @@ $(document).on('ready', function() {
         });
 
     });
+    //editieren von events
     $(document).on('click', '.organizer-editable-cell', function() {
         toggleOverlay();
         $.ajax({
@@ -83,6 +85,7 @@ $(document).on('ready', function() {
             }
         });
     });
+    //Löschen
     $(document).on('click', '.deleteButton', function() {
         toggleOverlay();
         $.ajax({
@@ -98,6 +101,7 @@ $(document).on('ready', function() {
             }
         });
     });
+    //Löschen von Arbeitszeiten und Events
     $(document).on('click', '.deleteWorktime, .deleteEvent', function(e) {
         e.stopPropagation();
         e.preventDefault();
@@ -118,37 +122,38 @@ $(document).on('ready', function() {
     //$("#modal").draggable({
     //    handle: ".modal-header"
     //});
-    //TODO: umbauen das Fenster aufgeht
-    //$(document).on('click', '#wo_organizerbundle_event_submit', function(e) {
-    //    e.stopPropagation();
-    //    e.preventDefault();
-    //    var form = $('form[name="wo_organizerbundle_event"]');
-    //    toggleOverlay();
-    //    $.ajax({
-    //        type:'POST',
-    //        url: form.data('check-url'),
-    //        data: {
-    //                'dateStartHour': $('#wo_organizerbundle_event_dateStart_time_hour').val(),
-    //                'dateStartMinute': $('#wo_organizerbundle_event_dateStart_time_minute').val(),
-    //                'dateEndHour': $('#wo_organizerbundle_event_dateEnd_time_hour').val(),
-    //                'dateEndMinute': $('#wo_organizerbundle_event_dateEnd_time_minute').val(),
-    //                'date': $('#wo_organizerbundle_event_day_date').val(),
-    //                'locationId': $('#wo_organizerbundle_event_location').val()
-    //        },
-    //        success: function(response) {
-    //            if (response.success == true) {
-    //                form.submit();
-    //            } else {
-    //                toggleOverlay();
-    //                form.find('.alert').remove();
-    //                form.prepend('<div class="alert alert-danger" role="alert">Speichern fehlgeschlagen da dieser Termin sich mit einem anderen überschneidet!</div>')
-    //            }
-    //        }
-    //    });
-    //});
+    //TODO: umbauen das Fenster aufgeht und gefragt wird ob der wirklich ersetzt werden soll
+    $(document).on('click', '#wo_organizerbundle_event_submit', function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        var form = $('form[name="wo_organizerbundle_event"]');
+        toggleOverlay();
+        $.ajax({
+            type:'POST',
+            url: form.data('check-url'),
+            data: {
+                    'dateStartHour': $('#wo_organizerbundle_event_dateStart_time_hour').val(),
+                    'dateStartMinute': $('#wo_organizerbundle_event_dateStart_time_minute').val(),
+                    'dateEndHour': $('#wo_organizerbundle_event_dateEnd_time_hour').val(),
+                    'dateEndMinute': $('#wo_organizerbundle_event_dateEnd_time_minute').val(),
+                    'date': $('#wo_organizerbundle_event_day_date').val(),
+                    'locationId': $('#wo_organizerbundle_event_location').val()
+            },
+            success: function(response) {
+                if (response.success == true) {
+                    form.submit();
+                } else {
+                    toggleOverlay();
+                    form.find('.alert').remove();
+                    form.prepend('<div class="alert alert-danger" role="alert">Speichern fehlgeschlagen da dieser Termin sich mit einem anderen überschneidet!</div>')
+                }
+            }
+        });
+    });
     //availableEvents = [];
+    //Autocomplete von Anwendungen bei eventerstellung
     $(document).on('focusin', "#wo_organizerbundle_event_info", function() {
-        console.log(availableServices);
+//        console.log(availableServices);
         $(this).autocomplete({
             source: availableServices,
             minLength: 2,

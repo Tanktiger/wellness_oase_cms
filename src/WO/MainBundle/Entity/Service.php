@@ -50,6 +50,13 @@ class Service
     private $duration;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="shortname", type="string", length=10)
+     */
+    private $shortname;
+
+    /**
      * @ORM\ManyToOne(targetEntity="WO\MainBundle\Entity\ServiceCategory", inversedBy="services", fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      **/
@@ -218,6 +225,22 @@ class Service
     public function setOffers($offers)
     {
         $this->offers = $offers;
+    }
+
+    /**
+     * @param string $shortname
+     */
+    public function setShortname($shortname)
+    {
+        $this->shortname = $shortname;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShortname()
+    {
+        return $this->shortname;
     }
 
 }

@@ -32,6 +32,7 @@ class WorktimeType extends AbstractType
             ->add('vacation', null, array('label' => 'Urlaub'))
             ->add('sick', null, array('label' => 'Krank'))
             ->add('onDemand', null, array('label' => 'Bei Bedarf'))
+            ->add('info', null, array('label' => 'Kommentar'))
         ;
     }
     

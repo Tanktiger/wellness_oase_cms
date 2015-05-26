@@ -91,6 +91,13 @@ class Worktime
      */
     private $onDemand = null;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="info", type="string", length=255)
+     */
+    private $info;
+
     public function __construct() {
 
     }
@@ -291,6 +298,22 @@ class Worktime
      */
     public function preUpdate() {
         $this->setTimerange($this->getStart()->format('H:i') . ' - ' . $this->getEnd()->format('H:i'));
+    }
+
+    /**
+     * @param string $info
+     */
+    public function setInfo($info)
+    {
+        $this->info = $info;
+    }
+
+    /**
+     * @return string
+     */
+    public function getInfo()
+    {
+        return $this->info;
     }
 
 }
