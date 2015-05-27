@@ -122,7 +122,6 @@ $(document).on('ready', function() {
     //$("#modal").draggable({
     //    handle: ".modal-header"
     //});
-    //TODO: umbauen das Fenster aufgeht und gefragt wird ob der wirklich ersetzt werden soll
     $(document).on('click', '#wo_organizerbundle_event_submit', function(e) {
         e.stopPropagation();
         e.preventDefault();

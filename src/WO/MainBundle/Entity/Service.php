@@ -52,7 +52,7 @@ class Service
     /**
      * @var string
      *
-     * @ORM\Column(name="shortname", type="string", length=10)
+     * @ORM\Column(name="shortname", type="string", length=50)
      */
     private $shortname;
 
