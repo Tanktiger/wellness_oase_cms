@@ -71,8 +71,8 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $entities = $em->getRepository('WOMainBundle:Service')->findAll();
         $result = array();
-        foreach ($entities as $key => $service) {
-            $result[] = $service->getShortname();
+        foreach ($entities as $service) {
+            $result[] = (null != $service->getShortname() && $service->getShortname() != '')?$service->getShortname():$service->getName();
         }
         return $result;
     }
