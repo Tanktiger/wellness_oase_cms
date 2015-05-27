@@ -12,6 +12,7 @@
         <thead>
             <tr>
                 <th>Name</th>
+                <th>Abkürzung</th>
                 <th>Preis</th>
                 <th>Beschreibung</th>
                 <th>Dauer</th>
@@ -22,6 +23,7 @@
         {% for entity in entities %}
             <tr>
                 <td><a href="{{ path('admin_service_show', { 'id': entity.id }) }}">{{ entity.name }}</a></td>
+                <td>{{ entity.shortname }}</td>
                 <td>{{ entity.price }}</td>
                 <td>{{ entity.description }}</td>
                 <td>{{ entity.duration }}</td>

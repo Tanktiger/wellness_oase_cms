@@ -62,12 +62,17 @@ class DefaultController extends Controller
         $d = \DateTime::createFromFormat($format, $date);
         return $d && $d->format($format) == $date;
     }
+
+    /**
+     * gets all Service names as array
+     * @return array
+     */
     private function getAllServices() {
         $em = $this->getDoctrine()->getManager();
         $entities = $em->getRepository('WOMainBundle:Service')->findAll();
         $result = array();
         foreach ($entities as $key => $service) {
-            $result[] = $service->getName();
+            $result[] = $service->getShortname();
         }
         return $result;
     }

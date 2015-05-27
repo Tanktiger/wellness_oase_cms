@@ -66,7 +66,7 @@ $(document).on('ready', function() {
         $.ajax({
             type:'GET',
             url: $(this).data('href'),
-            data: {'startdate': $(this).parent('tr').data('time'),
+            data: { 'startdate': $(this).parent('tr').data('time'),
                     'location_id': $(this).data('location-id')
                 },
             success: function(response) {
@@ -92,9 +92,9 @@ $(document).on('ready', function() {
             type:'GET',
             url: $(this).data('href'),
             success: function(response) {
-                $('#modal').html(response);
+                $('#delete_modal').html(response);
                 toggleOverlay();
-                $('#modal').modal({
+                $('#delete_modal').modal({
                     backdrop: 'static',
                     keyboard: false
                 });
@@ -105,7 +105,7 @@ $(document).on('ready', function() {
     $(document).on('click', '.deleteWorktime, .deleteEvent', function(e) {
         e.stopPropagation();
         e.preventDefault();
-        var form = $('#deleteForm');
+        var form = $(this).closest('form');
         toggleOverlay();
         $.ajax({
             type:'POST',
@@ -143,9 +143,32 @@ $(document).on('ready', function() {
                 if (response.success == true) {
                     form.submit();
                 } else {
+                    $('#delete_modal').html(response.event.deleteForm);
                     toggleOverlay();
-                    form.find('.alert').remove();
-                    form.prepend('<div class="alert alert-danger" role="alert">Speichern fehlgeschlagen da dieser Termin sich mit einem anderen überschneidet!</div>')
+                    $('#delete_modal').modal({
+                        backdrop: 'static',
+                        keyboard: false
+                    });
+                }
+            }
+        });
+    });
+    //überschreiben von events
+    $(document).on('click', '.overwriteYesButton', function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        var form = $(this).closest('form');
+        toggleOverlay();
+        $.ajax({
+            type:'POST',
+            url: form.attr('action'),
+            data: form.serialize(),
+            success: function(response) {
+                if (response.success == true) {
+                    $('form[name="wo_organizerbundle_event"]').submit();
+                } else {
+                    toggleOverlay();
+                    form.append('<div class="alert alert-danger" role="alert">Beim Speichern ist etwas schief gelaufen. Bitte probieren Sie es später erneut!</div>');
                 }
             }
         });
@@ -156,7 +179,7 @@ $(document).on('ready', function() {
 //        console.log(availableServices);
         $(this).autocomplete({
             source: availableServices,
-            minLength: 2,
+            minLength: 1,
             appendTo: '#autocomplete-container'
         });
     });

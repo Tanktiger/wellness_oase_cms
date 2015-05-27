@@ -39,7 +39,7 @@ class Event
     /**
      * @var string
      *
-     * @ORM\Column(name="customer", type="string", length=255)
+     * @ORM\Column(name="customer", type="string", length=255, nullable=true)
      */
     private $customer;
 
@@ -77,6 +77,19 @@ class Event
      * @ORM\Column(name="canceled", type="boolean", nullable=true)
      */
     private $canceled = null;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="couple", type="boolean", nullable=true)
+     */
+    private $couple = null;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Location", inversedBy="events", fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="couple_location_id", referencedColumnName="id", nullable=true)
+     **/
+    private $coupleLocation;
 
     /**
      * @var \DateTime
@@ -407,5 +420,38 @@ class Event
     {
         $this->telephone = $telephone;
     }
+
+    /**
+     * @return boolean
+     */
+    public function isCouple()
+    {
+        return $this->couple;
+    }
+
+    /**
+     * @param boolean $couple
+     */
+    public function setCouple($couple)
+    {
+        $this->couple = $couple;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCoupleLocation()
+    {
+        return $this->coupleLocation;
+    }
+
+    /**
+     * @param mixed $coupleLocation
+     */
+    public function setCoupleLocation($coupleLocation)
+    {
+        $this->coupleLocation = $coupleLocation;
+    }
+
 
 }

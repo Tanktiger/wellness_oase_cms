@@ -34,12 +34,6 @@ class DefaultController extends Controller
      * @Template()
      */
     public function getServiceOffersAction(Request $request) {
-//        $reqDate = $request->query->get('date');
-//        if (isset($reqDate) && $reqDate != '' && $this->validateDate($reqDate)) {
-//            $date = $reqDate;
-//        } else {
-//            $date = date('Y-m-d');
-//        }
         $callback = $request->get('callback');
         $em = $this->getDoctrine()->getManager();
         $entities = $em->getRepository('WOMainBundle:Offer')->getAllOffers();
@@ -54,7 +48,6 @@ class DefaultController extends Controller
             $result[$key]['oldPrice'] = $service->getPrice();
             $result[$key]['newPrice'] = $offer->getOfferPrice();
         }
-//        return new JsonResponse(array('offers' => $result));
         $response = new JsonResponse($result, 200, array());
         $response->setCallback($callback);
         return $response;

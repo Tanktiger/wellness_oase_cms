@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Employee
 {
+    const SYLKE_ID = 1;
     /**
      * @var integer
      *

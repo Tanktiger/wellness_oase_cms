@@ -114,6 +114,12 @@ class EventController extends Controller
                 $loc = $em->find('WOOrganizerBundle:Location', $locId);
                 if (isset($loc)) {
                     $entity->setLocation($loc);
+                    if ($loc->getName() == \WO\OrganizerBundle\Entity\Location::DEFAULT_SYLKE) {
+//                        $employee = $em->getRepository('WOOrganizerBundle:Employee')->findOneBy(array('name' => 'Sylke'));
+                        $sylke = $em->find('WOOrganizerBundle:Employee', \WO\OrganizerBundle\Entity\Employee::SYLKE_ID);
+                        $entity->setEmployee($sylke);
+                    }
+
                 }
             }
         }
@@ -281,6 +287,7 @@ class EventController extends Controller
      */
     public function checkFormAction(Request $request) {
         $success = false;
+        $replacing = null;
         $startMinute = $request->get('dateStartMinute');
         $startHour = $request->get('dateStartHour');
         $endMinute = $request->get('dateEndMinute');
@@ -297,16 +304,35 @@ class EventController extends Controller
         ) {
             $endTime = $date . ' ' . $endHour . ':' . $endMinute . ':00';
             $endTime = new \DateTime($endTime);
+            //Hack damit man nicht startzeit des nächsten termines trifft
+            $endTime->modify('-1 minute');
+
             $startTime = $date . ' ' . $startHour . ':' . $startMinute . ':00';
             $startTime = new \DateTime($startTime);
 
             $em = $this->getDoctrine()->getManager();
             $entities = $em->getRepository('WOOrganizerBundle:Event')->getAllBetweenStartAndEnd($startTime, $endTime, $locId);
+
             if ($entities->count() == 0) {
                 $success = true;
+            } else {
+                //TODO: umbauen auf mehrere
+                foreach ($entities as $event) {
+                    $new = array();
+//                    $new['customer'] = $event->getCustomer();
+//                    $new['start'] = $event->getDateStart()->format('d.m.Y H:i');
+//                    $new['end'] = $event->getDateEnd()->format('d.m.Y H:i');
+//                    $new['info'] = $event->getInfo();
+                    $deleteform = $this->createDeleteForm($event->getId());
+                    $html = $this->renderView('WOOrganizerBundle:Event:overwrite.html.twig', array('delete_form' => $deleteform->createView(), 'event' => $event) );
+                    $new['deleteForm'] = $html;
+//                    $new['deleteUrl'] = $this->generateUrl('organizer_event_delete', array('id' => $event->getId()));
+                    $replacing = $new;
+                    break;
+                }
             }
         }
-        return new JsonResponse(array('success' => $success));
+        return new JsonResponse(array('success' => $success, 'event' => $replacing));
     }
 
     private function checkIsset($value) {

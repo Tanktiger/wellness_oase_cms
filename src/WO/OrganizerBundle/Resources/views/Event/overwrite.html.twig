@@ -1,0 +1,53 @@
+{% block body -%}
+    {% form_theme delete_form 'WOOrganizerBundle:Form:fields.html.twig' %}
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Termin überschreiben</h4>
+            </div>
+            <div class="modal-body">
+                <div class="te">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="alert alert-danger" role="alert">Speichern fehlgeschlagen da ein anderer Termin überschrieben wird!</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            Anfang: {{ event.dateStart|date('d.m.Y H:i') }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            Ende: {{ event.dateEnd|date('d.m.Y H:i') }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            Kunde: {{ event.customer }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            Info: {{ event.info|nl2br }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="alert alert-danger" role="alert">Wollen Sie diesen Termin wirklich überschreiben?</div>
+                        </div>
+                    </div>
+                    {{  form_start(delete_form, {'attr': {'class': 'form'}}) }}
+                    {{ form_row(delete_form.submit, {'label': 'Ja', 'attr': {'class': 'btn-danger overwriteYesButton pull-right'}}) }}
+                    <button type="button" class="btn btn-primary overwriteNoButton" data-dismiss="modal">Nein</button>
+                    {{ form_rest(delete_form) }}
+                    {{ form_end(delete_form) }}
+                    {#{{ form(delete_form) }}#}
+                    {#<a href="#" class="btn btn-danger deleteButton" data-href="{{ path("organizer_event_delete", {id: event.id}) }}">Löschen</a>#}
+                </div>
+            </div>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+{% endblock %}
