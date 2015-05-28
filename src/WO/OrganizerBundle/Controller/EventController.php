@@ -304,11 +304,14 @@ class EventController extends Controller
         ) {
             $endTime = $date . ' ' . $endHour . ':' . $endMinute . ':00';
             $endTime = new \DateTime($endTime);
-            //Hack damit man nicht startzeit des nächsten termines trifft
-            $endTime->modify('-1 minute');
+
 
             $startTime = $date . ' ' . $startHour . ':' . $startMinute . ':00';
             $startTime = new \DateTime($startTime);
+
+            //Hack damit man nicht startzeit des nächsten termines trifft
+            $endTime->modify('-1 minute');
+            $startTime->modify('+1 minute');
 
             $em = $this->getDoctrine()->getManager();
             $entities = $em->getRepository('WOOrganizerBundle:Event')->getAllBetweenStartAndEnd($startTime, $endTime, $locId);
