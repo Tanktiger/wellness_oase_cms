@@ -21,6 +21,7 @@ class ServiceType extends AbstractType
             ->add('description', null, array('label' => 'Beschreibung'))
             ->add('duration', null, array('label' => 'Dauer in min'))
             ->add('category', null, array('label' => 'Bereich'))
+            ->add('show_online', null, array('label' => 'Sichtbar auf Webseite'))
         ;
     }
     

@@ -11,6 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Validator\Constraints\False;
 use WO\OrganizerBundle\Entity\Event;
 use WO\OrganizerBundle\Form\EventType;
+use WO\MainBundle\Services\ConfigHelper;
 
 /**
  * Event controller.
@@ -52,9 +53,8 @@ class EventController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            $entity->setUser($this->getUser());
             $em = $this->getDoctrine()->getManager();
-//            $entity->setCanceled(false);
-
             $em->persist($entity);
             $em->flush();
 
@@ -108,6 +108,7 @@ class EventController extends Controller
             $user = $this->getUser();
             $entity->setUser($user);
 
+            //Standard Ort für Sylke setzen
             if (null !== $request->query->get('location_id')) {
                 $locId = $request->query->get('location_id');
                 $em = $this->getDoctrine()->getManager();
@@ -288,6 +289,14 @@ class EventController extends Controller
     public function checkFormAction(Request $request) {
         $success = false;
         $replacing = null;
+
+        $em = $this->getDoctrine()->getManager();
+        $config = $em->find('WOMainBundle:Config', 1);
+//        $configHelper = new ConfigHelper(null, $em);
+//        $config = $configHelper->get();
+        if ($config->getEventOverwriteProtection() === false) {
+            return new JsonResponse(array('success' => true, 'event' => $replacing));
+        }
         $startMinute = $request->get('dateStartMinute');
         $startHour = $request->get('dateStartHour');
         $endMinute = $request->get('dateEndMinute');
@@ -313,7 +322,7 @@ class EventController extends Controller
             $endTime->modify('-1 minute');
             $startTime->modify('+1 minute');
 
-            $em = $this->getDoctrine()->getManager();
+
             $entities = $em->getRepository('WOOrganizerBundle:Event')->getAllBetweenStartAndEnd($startTime, $endTime, $locId);
 
             if ($entities->count() == 0) {

@@ -1,12 +1,17 @@
 {% extends 'WOMainBundle::admin.html.twig' %}
 {% block body -%}
-    <h1>Service list</h1>
+    <h1>Anwendungen und Angebote</h1>
     <ul>
         <li>
             <a href="{{ path('admin_service_new') }}">
                 Neue Anwedung hinzufügen
             </a>
         </li>
+        {% if is_granted('ROLE_SUPER_ADMIN') %}
+        <li>
+            <a href="{{ path("admin_servicecategory") }}" class="">Anwendungskategorien verwalten</a>
+        </li>
+        {% endif %}
     </ul>
     <table class="records_list">
         <thead>
@@ -16,6 +21,7 @@
                 <th>Preis</th>
                 <th>Beschreibung</th>
                 <th>Dauer</th>
+                <th>Sichtbar</th>
                 <th>&nbsp;</th>
             </tr>
         </thead>
@@ -27,6 +33,11 @@
                 <td>{{ entity.price }}</td>
                 <td>{{ entity.description }}</td>
                 <td>{{ entity.duration }}</td>
+                {% if entity.getShowOnline %}
+                    <td>Ja</td>
+                {% else %}
+                    <td>Nein</td>
+                {% endif %}
                 <td>
                 <ul>
                     <li>

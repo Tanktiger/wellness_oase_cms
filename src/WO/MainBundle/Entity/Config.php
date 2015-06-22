@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Config
  *
- * @ORM\Table()
+ * @ORM\Table(name="config")
  * @ORM\Entity
  */
 class Config
@@ -37,6 +37,13 @@ class Config
      * @ORM\Column(name="layout", type="string", length=50)
      */
     private $layout = 'bootstrap';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="event_overwrite_protection", type="boolean", nullable=true)
+     */
+    private $event_overwrite_protection = false;
 
 
     /**
@@ -94,4 +101,21 @@ class Config
     {
         return $this->layout;
     }
+
+    /**
+     * @param string $event_overwrite_protection
+     */
+    public function setEventOverwriteProtection($event_overwrite_protection)
+    {
+        $this->event_overwrite_protection = $event_overwrite_protection;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEventOverwriteProtection()
+    {
+        return $this->event_overwrite_protection;
+    }
+
 }

@@ -114,64 +114,95 @@ $(document).on('ready', function() {
             success: function(response) {
                 if (response.success == true) {
                     location.reload();
+                } else {
+                    toggleOverlay();
                 }
-                toggleOverlay();
             }
         });
     });
     //$("#modal").draggable({
     //    handle: ".modal-header"
     //});
-    $(document).on('click', '#wo_organizerbundle_event_submit', function(e) {
-        e.stopPropagation();
-        e.preventDefault();
-        var form = $('form[name="wo_organizerbundle_event"]');
-        toggleOverlay();
-        $.ajax({
-            type:'POST',
-            url: form.data('check-url'),
-            data: {
+    //schneller check ob damit nicht ein Termin überschrieben wird
+    $(document).on('change', '#wo_organizerbundle_event_day_date, #wo_organizerbundle_event_dateStart_time_hour, #wo_organizerbundle_event_dateStart_time_minute, #wo_organizerbundle_event_dateEnd_time_hour, #wo_organizerbundle_event_dateEnd_time_minute',
+        function() {
+            var form = $('form[name="wo_organizerbundle_event"]');
+            var that = $(this);
+            $.ajax({
+                type:'POST',
+                url: form.data('check-url'),
+                data: {
                     'dateStartHour': $('#wo_organizerbundle_event_dateStart_time_hour').val(),
                     'dateStartMinute': $('#wo_organizerbundle_event_dateStart_time_minute').val(),
                     'dateEndHour': $('#wo_organizerbundle_event_dateEnd_time_hour').val(),
                     'dateEndMinute': $('#wo_organizerbundle_event_dateEnd_time_minute').val(),
                     'date': $('#wo_organizerbundle_event_day_date').val(),
                     'locationId': $('#wo_organizerbundle_event_location').val()
-            },
-            success: function(response) {
-                if (response.success == true) {
-                    form.submit();
-                } else {
-                    $('#delete_modal').html(response.event.deleteForm);
-                    toggleOverlay();
-                    $('#delete_modal').modal({
-                        backdrop: 'static',
-                        keyboard: false
-                    });
+                },
+                success: function(response) {
+                    form.find('.alert').remove();
+                    if (response.success != true) {
+                        form.find('#wo_organizerbundle_event_submit').closest('div').prepend('<div class="alert alert-danger" role="alert">Achtung sie überschreiben damit einen anderen Termin!</div>');
+                    }
                 }
-            }
+            });
         });
-    });
+    //TODO: erstmal wieder raus - mit dem extra Fenster fand Mama gut aber er sollte auch anschlagen wenn man den Kunden ändert - zudem funktionierte das nicht richtig - wird später vll noch gebraucht
+//    $(document).on('click', '#wo_organizerbundle_event_submit', function(e) {
+//        e.stopPropagation();
+//        e.preventDefault();
+//        var form = $('form[name="wo_organizerbundle_event"]');
+//        var that = $(this);
+//        toggleOverlay();
+//        $.ajax({
+//            type:'POST',
+//            url: form.data('check-url'),
+//            data: {
+//                    'dateStartHour': $('#wo_organizerbundle_event_dateStart_time_hour').val(),
+//                    'dateStartMinute': $('#wo_organizerbundle_event_dateStart_time_minute').val(),
+//                    'dateEndHour': $('#wo_organizerbundle_event_dateEnd_time_hour').val(),
+//                    'dateEndMinute': $('#wo_organizerbundle_event_dateEnd_time_minute').val(),
+//                    'date': $('#wo_organizerbundle_event_day_date').val(),
+//                    'locationId': $('#wo_organizerbundle_event_location').val()
+//            },
+//            success: function(response) {
+//                if (response.success == true) {
+//                    form.submit();
+//                } else {
+////                    that.closest('div').append('<div class="alert alert-danger" role="alert">Achtung sie überschreiben damit ein Event!</div>');
+//                    toggleOverlay();
+//                    form.append('<div class="alert alert-danger" role="alert">Beim Speichern ist etwas schief gelaufen. Bitte probieren Sie es später erneut!</div>');
+//                    //Frage Modal ob wirklich überschrieben werden soll
+////                    $('#delete_modal').html(response.event.deleteForm);
+////                    toggleOverlay();
+////                    $('#delete_modal').modal({
+////                        backdrop: 'static',
+////                        keyboard: false
+////                    });
+//                }
+//            }
+//        });
+//    });
     //überschreiben von events
-    $(document).on('click', '.overwriteYesButton', function(e) {
-        e.stopPropagation();
-        e.preventDefault();
-        var form = $(this).closest('form');
-        toggleOverlay();
-        $.ajax({
-            type:'POST',
-            url: form.attr('action'),
-            data: form.serialize(),
-            success: function(response) {
-                if (response.success == true) {
-                    $('form[name="wo_organizerbundle_event"]').submit();
-                } else {
-                    toggleOverlay();
-                    form.append('<div class="alert alert-danger" role="alert">Beim Speichern ist etwas schief gelaufen. Bitte probieren Sie es später erneut!</div>');
-                }
-            }
-        });
-    });
+//    $(document).on('click', '.overwriteYesButton', function(e) {
+//        e.stopPropagation();
+//        e.preventDefault();
+//        var form = $(this).closest('form');
+//        toggleOverlay();
+//        $.ajax({
+//            type:'POST',
+//            url: form.attr('action'),
+//            data: form.serialize(),
+//            success: function(response) {
+//                if (response.success == true) {
+//                    $('form[name="wo_organizerbundle_event"]').submit();
+//                } else {
+//                    toggleOverlay();
+//                    form.append('<div class="alert alert-danger" role="alert">Beim Speichern ist etwas schief gelaufen. Bitte probieren Sie es später erneut!</div>');
+//                }
+//            }
+//        });
+//    });
     //availableEvents = [];
     //Autocomplete von Anwendungen bei eventerstellung
     $(document).on('focusin', "#wo_organizerbundle_event_info", function() {

@@ -20,7 +20,8 @@ class ConfigType extends AbstractType
             ->add('offline')
             ->add('layout','choice', array(
                 'choice_list' => new ChoiceList(array(Config::LAYOUT_SEMANTIC, Config::LAYOUT_BOOTSTRAP),
-                                                array(Config::LAYOUT_SEMANTIC, Config::LAYOUT_BOOTSTRAP))));
+                                                array(Config::LAYOUT_SEMANTIC, Config::LAYOUT_BOOTSTRAP))))
+            ->add('event_overwrite_protection')
         ;
     }
     

@@ -20,7 +20,7 @@ foreach($tables as $table)
 
     echo PHP_EOL . $table . PHP_EOL;
 
-    $return.= 'DROP TABLE '.$table.';';
+    $return.= 'DROP TABLE IF EXISTS '.$table.';';
     $row2 = mysqli_fetch_row($db->query('SHOW CREATE TABLE '.$table));
     $return.= "\n\n".$row2[1].";\n\n";
 

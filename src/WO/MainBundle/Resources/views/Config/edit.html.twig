@@ -1,11 +1,10 @@
 {% extends 'WOMainBundle::admin.html.twig' %}
-
+{% form_theme edit_form 'WOOrganizerBundle:Form:fields.html.twig' %}
 {% block title %}Seitenkonfiguration{% endblock %}
 
 {% block body -%}
     <h1>Config edit</h1>
 
-    {% form_theme edit_form 'WOMainBundle:Form:fields.html.twig' %}
     {{ form_start(edit_form, { 'attr': { 'class': 'ui form config' } }) }}
     {#<div class="inline field">#}
         {#<label>HTML Select</label>#}

@@ -1,5 +1,5 @@
 {% extends 'WOMainBundle::admin.html.twig' %}
-
+{#{% form_theme edit_form 'WOOrganizerBundle:Form:fields.html.twig' %}#}
 {% block title %}Seitenkonfiguration{% endblock %}
 
 {% block body -%}
@@ -11,6 +11,7 @@
                 <th>Id</th>
                 <th>Offline</th>
                 <th>Layout</th>
+                <th>EOP</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -18,8 +19,17 @@
         {% for entity in entities %}
             <tr>
                 <td><a href="{{ path('admin_config_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.offline }}</td>
+                {% if entity.offline %}
+                    <td>JA</td>
+                {% else %}
+                    <td>Nein</td>
+                {% endif %}
                 <td>{{ entity.layout }}</td>
+                {% if entity.getEventOverwriteProtection %}
+                    <td>JA</td>
+                {% else %}
+                    <td>Nein</td>
+                {% endif %}
                 <td>
                 <ul>
                     <li>

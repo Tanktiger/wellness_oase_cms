@@ -8,3 +8,7 @@ services:
         class: WO\OrganizerBundle\Services\TableHelper
         arguments: [@router, "entityManager"]
         scope: request
+    config_helper:
+        class: WO\MainBundle\Services\ConfigHelper
+        arguments: [@router, "entityManager"]
+        scope: request

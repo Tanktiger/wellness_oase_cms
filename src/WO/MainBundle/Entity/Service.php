@@ -57,6 +57,13 @@ class Service
     private $shortname;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="show_online", type="boolean", nullable=true)
+     */
+    private $show_online = null;
+
+    /**
      * @ORM\ManyToOne(targetEntity="WO\MainBundle\Entity\ServiceCategory", inversedBy="services", fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      **/
@@ -241,6 +248,22 @@ class Service
     public function getShortname()
     {
         return $this->shortname;
+    }
+
+    /**
+     * @param boolean $show_online
+     */
+    public function setShowOnline($show_online)
+    {
+        $this->show_online = $show_online;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getShowOnline()
+    {
+        return $this->show_online;
     }
 
 }
