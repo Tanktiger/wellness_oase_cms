@@ -30,9 +30,9 @@ class ApiController extends Controller
         $category = $qb->select('c')
             ->from('WOMainBundle:ServiceCategory', 'c')
             ->where('c.show_online= :true')
-            ->where('c.slug= :slug')
-            ->setParameter('slug', $slug)
+            ->andWhere('c.slug= :slug')
             ->setParameter('true', 1)
+            ->setParameter('slug', $slug)
             ->getQuery()
             ->getSingleResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
         $response = new JsonResponse(array('entities' => $entities, 'category' => $category), 200, array());

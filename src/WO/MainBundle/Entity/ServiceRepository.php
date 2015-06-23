@@ -17,16 +17,17 @@ class ServiceRepository extends EntityRepository
      * @param null $slug
      * @return array
      */
-    public function findByCategory($slug = null, $online = 1) {
+    public function findByCategory($slug = null, $online = true) {
         $q = $this
             ->createQueryBuilder('s')
             ->select('s')
             ->leftJoin('s.category', 'c')
             ->where('c.slug = :slug')
-            ->where('s.show_online= :true')
-            ->where('c.show_online= :true')
+            ->andWhere('s.show_online= :true')
+            ->andWhere('c.show_online= :truee')
             ->setParameter('slug', $slug)
             ->setParameter('true', $online)
+            ->setParameter('truee', $online)
             ->getQuery();
 
         $services = $q->getArrayResult();
