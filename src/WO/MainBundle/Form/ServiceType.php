@@ -22,6 +22,9 @@ class ServiceType extends AbstractType
             ->add('duration', null, array('label' => 'Dauer in min'))
             ->add('category', null, array('label' => 'Bereich'))
             ->add('show_online', null, array('label' => 'Sichtbar auf Webseite'))
+            ->add('glowe', null, array('label' => 'Nicht Verfügbar in Glowe'))
+            ->add('position', null, array('label' => 'Position auf der Webseite'))
+            ->add('parentService', null, array('label' => 'Hauptangebot'))
         ;
     }
     

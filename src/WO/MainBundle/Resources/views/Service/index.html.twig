@@ -13,7 +13,10 @@
         </li>
         {% endif %}
     </ul>
-    <table class="records_list">
+    <div class="input-group"> <span class="input-group-addon">Filter</span>
+        <input id="filter" type="text" class="form-control" placeholder="Anwendungsname ...">
+    </div>
+    <table class="records_list table" id="serviceListTable">
         <thead>
             <tr>
                 <th>Name</th>
@@ -22,6 +25,8 @@
                 <th>Beschreibung</th>
                 <th>Dauer</th>
                 <th>Sichtbar</th>
+                <th>Glowe</th>
+                <th>Position</th>
                 <th>&nbsp;</th>
             </tr>
         </thead>
@@ -38,19 +43,24 @@
                 {% else %}
                     <td>Nein</td>
                 {% endif %}
+                {% if entity.isGlowe %}
+                    <td>Ja</td>
+                {% else %}
+                    <td>Nein</td>
+                {% endif %}
+                <td>{{ entity.position }}</td>
                 <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('admin_service_show', { 'id': entity.id }) }}">zeigen</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('admin_service_edit', { 'id': entity.id }) }}">editieren</a>
-                    </li>
-                </ul>
+                    <ul>
+                        <li>
+                            <a href="{{ path('admin_service_show', { 'id': entity.id }) }}">zeigen</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_service_edit', { 'id': entity.id }) }}">editieren</a>
+                        </li>
+                    </ul>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
     {% endblock %}

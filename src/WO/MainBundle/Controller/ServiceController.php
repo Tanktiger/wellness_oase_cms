@@ -226,7 +226,7 @@ class ServiceController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('service'));
+        return $this->redirect($this->generateUrl('admin_service'));
     }
 
     /**

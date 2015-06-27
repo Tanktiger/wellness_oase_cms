@@ -24,6 +24,26 @@
                 <th>Dauer</th>
                 <td>{{ entity.duration }}</td>
             </tr>
+            <tr>
+                <th>Position</th>
+                <td>{{ entity.position }}</td>
+            </tr>
+            <tr>
+                <th>In Glowe verfügbar</th>
+                {% if entity.isGlowe %}
+                    <td>Ja</td>
+                {% else %}
+                    <td>Nein</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th>Auf Webseite sichtbar</th>
+                {% if entity.getShowOnline %}
+                    <td>Ja</td>
+                {% else %}
+                    <td>Nein</td>
+                {% endif %}
+            </tr>
         </tbody>
     </table>
 

@@ -213,6 +213,16 @@ $(document).on('ready', function() {
             appendTo: '#autocomplete-container'
         });
     });
+    //Anwendungen Suche
+    $('#filter').keyup(function () {
+
+        var rex = new RegExp($(this).val(), 'i');
+        $('#serviceListTable tr').hide();
+        $('#serviceListTable tr').filter(function () {
+            return rex.test($(this).find('td:first').text());
+        }).show();
+
+    })
 });
 
 function toggleOverlay() {

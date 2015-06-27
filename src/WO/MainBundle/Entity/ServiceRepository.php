@@ -14,24 +14,27 @@ class ServiceRepository extends EntityRepository
 {
     /**
      * findet Services über den Catgory Slug und wenn sie online sind
-     * @param null $slug
+     * @param string $slug
      * @return array
      */
     public function findByCategory($slug = null, $online = true) {
-        $q = $this
-            ->createQueryBuilder('s')
-            ->select('s')
+        $q = $this->createQueryBuilder('s');
+        $q = $q->select('s', 'ss')
+            ->leftJoin('s.subServices', 'ss')
             ->leftJoin('s.category', 'c')
             ->where('c.slug = :slug')
             ->andWhere('s.show_online= :true')
             ->andWhere('c.show_online= :truee')
+//            ->andWhere('ss.show_online= :sstrue')
+            ->andWhere($q->expr()->isNull('s.parentService'))
             ->setParameter('slug', $slug)
             ->setParameter('true', $online)
             ->setParameter('truee', $online)
+//            ->setParameter('sstrue', $online)
+            ->orderBy('s.position', 'ASC')
             ->getQuery();
 
         $services = $q->getArrayResult();
-
         return $services;
     }
 }

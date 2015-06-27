@@ -2,6 +2,7 @@
 
 namespace WO\MainBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,21 +32,21 @@ class Service
     /**
      * @var string
      *
-     * @ORM\Column(name="price", type="decimal")
+     * @ORM\Column(name="price", type="decimal", nullable=true)
      */
     private $price;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="duration", type="string", length=255)
+     * @ORM\Column(name="duration", type="string", length=255, nullable=true)
      */
     private $duration;
 
@@ -61,7 +62,21 @@ class Service
      *
      * @ORM\Column(name="show_online", type="boolean", nullable=true)
      */
-    private $show_online = null;
+    private $show_online = false;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="glowe", type="boolean", nullable=true)
+     */
+    private $glowe = false;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="position", type="smallint")
+     */
+    private $position = 0;
 
     /**
      * @ORM\ManyToOne(targetEntity="WO\MainBundle\Entity\ServiceCategory", inversedBy="services", fetch="EXTRA_LAZY")
@@ -74,8 +89,23 @@ class Service
      **/
     private $offers;
 
+    /**
+     * @ORM\OneToMany(targetEntity="WO\MainBundle\Entity\Service", mappedBy="parentService")
+     */
+    private $subServices;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="WO\MainBundle\Entity\Service", inversedBy="subServices")
+     * @ORM\JoinColumn(name="parent_service_id", referencedColumnName="id")
+     */
+    private $parentService;
+
     public function __toString() {
         return $this->name;
+    }
+
+    public function __construct() {
+        $this->subServices = new ArrayCollection();
     }
     /**
      * Get id
@@ -265,5 +295,79 @@ class Service
     {
         return $this->show_online;
     }
+
+    /**
+     * @return boolean
+     */
+    public function isGlowe()
+    {
+        return $this->glowe;
+    }
+
+    /**
+     * @param boolean $glowe
+     */
+    public function setGlowe($glowe)
+    {
+        $this->glowe = $glowe;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * @param int $position
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSubServices()
+    {
+        return $this->subServices;
+    }
+
+    /**
+     * @param mixed $subServices
+     */
+    public function setSubServices($subServices)
+    {
+        $this->subServices = $subServices;
+    }
+
+    /**
+     * @param mixed $subServices
+     */
+    public function addSubServices($subServices)
+    {
+        $this->subServices[] = $subServices;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getParentService()
+    {
+        return $this->parentService;
+    }
+
+    /**
+     * @param mixed $parentService
+     */
+    public function setParentService($parentService)
+    {
+        $this->parentService = $parentService;
+    }
+
+
 
 }

@@ -16,3 +16,9 @@ UPDATE `servicecategory` SET `slug`='sonderangebote' WHERE  `id`=10;
 UPDATE servicecategory SET show_online = 1 WHERE id != 10;
 UPDATE service SET show_online = 1;
 
+/*27.06*/
+
+ALTER TABLE service ADD parent_service_id INT DEFAULT NULL, ADD glowe TINYINT(1) DEFAULT NULL, ADD position SMALLINT NOT NULL;
+ALTER TABLE service ADD CONSTRAINT FK_E19D9AD2AA1F2DB6 FOREIGN KEY (parent_service_id) REFERENCES service (id);
+CREATE INDEX IDX_E19D9AD2AA1F2DB6 ON service (parent_service_id);
+

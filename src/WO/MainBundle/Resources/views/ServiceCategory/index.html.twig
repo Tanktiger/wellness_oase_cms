@@ -3,7 +3,7 @@
 {% block body -%}
     <h1>Anwendungskategorien</h1>
 
-    <table class="records_list">
+    <table class="records_list table">
         <thead>
             <tr>
                 <th>Id</th>
@@ -27,14 +27,14 @@
                     <td>Nein</td>
                 {% endif %}
                 <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('admin_servicecategory_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('admin_servicecategory_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
+                    <ul>
+                        <li>
+                            <a href="{{ path('admin_servicecategory_show', { 'id': entity.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_servicecategory_edit', { 'id': entity.id }) }}">edit</a>
+                        </li>
+                    </ul>
                 </td>
             </tr>
         {% endfor %}
