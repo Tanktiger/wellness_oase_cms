@@ -3,6 +3,7 @@
 namespace WO\OrganizerBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\DataTransformer\DateTimeToLocalizedStringTransformer;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -14,10 +15,17 @@ class WorktimeType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+//        $builder->addViewTransformer(new DateTimeToLocalizedStringTransformer(
+//            date_default_timezone_get(),
+//            date_default_timezone_get(),
+//            \Symfony\Component\Form\Extension\Core\Type\DateType::DEFAULT_FORMAT,
+//            \IntlDateFormatter::NONE,
+//            \IntlDateFormatter::GREGORIAN,
+//            null
+//        ));
         $builder
 //            ->add('date', null, array('label' => 'Tag'))
             ->add('date', 'date', array('read_only' => true,
-                'widget' => 'single_text',
                 'label' => 'Tag'))
             ->add('start', null, array('label' => 'Arbeitszeit Anfang',
                                         'minutes' => array(0,15,30,45),
@@ -34,6 +42,7 @@ class WorktimeType extends AbstractType
             ->add('onDemand', null, array('label' => 'Bei Bedarf'))
             ->add('info', null, array('label' => 'Kommentar'))
         ;
+
     }
     
     /**

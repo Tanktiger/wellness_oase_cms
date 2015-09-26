@@ -85,6 +85,7 @@ class WorktimeController extends Controller
     public function newAction(Request $request)
     {
         $entity = new Worktime();
+
         if (null !== $request && null !== ($request->query->get('date'))) {
             $date = new \DateTime($request->query->get('date'));
             $entity->setDate($date);
