@@ -47,6 +47,7 @@ class EventType extends AbstractType
             ->add('employee', null, array('label' => 'Mitarbeiter'))
             ->add('location', null, array('label' => 'Ort', 'read_only' => true))
             ->add('canceled', null, array('label' => 'Abgesagt'))
+            ->add('pinned', null, array('label' => 'Fester Termin'))
 //            ->add('couple', null, array('label' => 'Pärchenarrangement'))
 //            ->add('coupleLocation', null, array('label' => '2. Ort', 'attr'=> array('class'=>'coupleInput')))
         ;

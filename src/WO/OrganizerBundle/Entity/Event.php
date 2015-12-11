@@ -78,6 +78,13 @@ class Event
      */
     private $canceled = null;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="pinned", type="boolean", nullable=true)
+     */
+    private $pinned = null;
+
 //    /**
 //     * @var boolean
 //     *
@@ -419,6 +426,22 @@ class Event
     public function setTelephone($telephone)
     {
         $this->telephone = $telephone;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isPinned()
+    {
+        return $this->pinned;
+    }
+
+    /**
+     * @param boolean $pinned
+     */
+    public function setPinned($pinned)
+    {
+        $this->pinned = $pinned;
     }
 
 //    /**

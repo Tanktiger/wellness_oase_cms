@@ -116,6 +116,9 @@ class TableHelper {
                     if (isset($extrainfo) && $extrainfo != '') {
                         $html .= '&nbsp;<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>';
                     }
+                    if ($event->isPinned()) {
+                        $html .= '&nbsp;<span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>';
+                    }
                     $html .= '</td>';
                 } else {
                     //create clickable cell for event creation
